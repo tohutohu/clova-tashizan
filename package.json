@@ -1,0 +1,25 @@
+{
+  "name": "clova-tashizan",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "@line/clova-cek-sdk-nodejs": "^1.0.1",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tohutohu/clova-tashizan.git"
+  },
+  "author": "tohutohu",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tohutohu/clova-tashizan/issues"
+  },
+  "homepage": "https://github.com/tohutohu/clova-tashizan#readme"
+}

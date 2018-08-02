@@ -1,0 +1,22 @@
+version: "2"
+services:
+  tashizan:
+    build: .
+    command: node server.js
+    environment:
+      VIRTUAL_HOST: tashizan.to-hutohu.com
+      LETSENCRYPT_HOST: tashizan.to-hutohu.com
+      LETSENCRYPT_EMAIL: tohu.soy@gmail.com
+    restart: always
+    volumes:
+      - .:/work
+      - /work/node_modules
+    ports:
+      - 8080
+    networks:
+      - docker-nginx_default
+networks:
+  docker-nginx_default:
+    external: true
+
+
