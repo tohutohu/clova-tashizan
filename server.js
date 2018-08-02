@@ -4,29 +4,30 @@ const express = require('express');
 const clovaSkillHandler = clova.Client
   .configureSkill()
   .onLaunchRequest(responseHelper => {
+    responseHelper.responseObject.sessionAttributes.count = 0;
     responseHelper.setSimpleSpeech({
       lang: 'ja',
       type: 'PlainText',
-      value: 'おはよう',
+      value: '足し算を起動しました。現在の値は0です。',
     });
   })
   .onIntentRequest(async responseHelper => {
+    console.log(responseHelper)
     const intent = responseHelper.getIntentName();
     const sessionId = responseHelper.getSessionId();
 
     switch (intent) {
-      case 'Clova.YesIntent':
-        // Build speechObject directly for response
-        responseHelper.setSimpleSpeech({
-          lang: 'ja',
-          type: 'PlainText',
-          value: 'はいはい',
-        });
-        break;
-      case 'Clova.NoIntent':
-        // Or build speechObject with SpeechBuilder for response
+      case 'plus':
+        const number = Number(responseHelper.getSlot('number') || 0);
+        responseHelper.responseObject.sessionAttributes.count = Number(responseHelper.requestObject.session.sessionAttributes.count) + number;
         responseHelper.setSimpleSpeech(
-          clova.SpeechBuilder.createSpeechText('いえいえ')
+          clova.SpeechBuilder.createSpeechText(`${number}足しました。現在の値は${responseHelper.responseObject.sessionAttributes.count}です。`)
+        );
+        break
+      case 'Clova.CancelIntent':
+        responseHelper.responseObject.response.shouldEndSession = true;
+        responseHelper.setSimpleSpeech(
+          clova.SpeechBuilder.createSpeechText(`足し算を終了します。最後の値は${responseHelper.responseObject.sessionAttributes.count}でした。`)
         );
         break;
     }
