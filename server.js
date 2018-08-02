@@ -39,8 +39,10 @@ const clovaSkillHandler = clova.Client
   .handle();
 
 const app = new express();
-const clovaMiddleware = clova.Middleware({ applicationId: "YOUR_APPLICATION_ID" });
+const clovaMiddleware = clova.Middleware({ applicationId: "com.to-hutohu.tashizan" });
 // Use `clovaMiddleware` if you want to verify signature and applicationId.
 // Please note `applicationId` is required when using this middleware.
-app.post('/clova', clovaMiddleware, clovaSkillHandler);
+app.post('/', clovaMiddleware, clovaSkillHandler);
+
+app.listen(8080);
 
