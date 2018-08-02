@@ -8,6 +8,7 @@ services:
       LETSENCRYPT_HOST: tashizan.to-hutohu.com
       LETSENCRYPT_EMAIL: tohu.soy@gmail.com
     restart: always
+    working_dir: /work
     volumes:
       - .:/work
       - /work/node_modules

@@ -44,5 +44,18 @@ const clovaMiddleware = clova.Middleware({ applicationId: "com.to-hutohu.tashiza
 // Please note `applicationId` is required when using this middleware.
 app.post('/', clovaMiddleware, clovaSkillHandler);
 
+app.get('/ping', (req, res) => {
+  console.log(req)
+  res.send('pong')
+})
+
+app.get('*', (req, res) => {
+  res.send(req.originalUrl)
+})
+
+app.post('*', (req, res) => {
+  res.send(req.originalUrl)
+})
+
 app.listen(8080);
 
